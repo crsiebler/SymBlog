@@ -1,0 +1,15 @@
+{# src/Blogger/BlogBundle/Resources/views/Comment/index.html.twig #}
+
+{% for comment in comments %}
+    <article class="comment {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
+        <header>
+            <p><span class="highlight">{{ comment.user }}</span> commented <time datetime="{{ comment.created|date('c') }}">{{ comment.created|date('l, F j, Y') }}</time></p>
+        </header>
+        <p>{{ comment.comment }}</p>
+        {% if 'BloggerBlogBundle_blog_update' in app.request.attributes.get('_route') %}
+            <br><a href="{{ path('BloggerBlogBundle_comment_remove', { 'id': comment.id, 'blog_id': comment.blog.id } ) }}" />Remove Comment</a></p>
+        {% endif %}
+    </article>
+{% else %}
+    <p>There are no comments for this post. Be the first to comment...</p>
+{% endfor %}

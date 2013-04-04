@@ -1,0 +1,16 @@
+{# src/Blogger/BlogBundle/Resources/views/Blog/form.html.twig #}
+{% if 'BloggerBlogBundle_blog_update' in app.request.attributes.get('_route') %}
+    <form action="{{ path('BloggerBlogBundle_blog_update', { 'id': blog.id } ) }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_widget(form) }}
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+{% elseif 'BloggerBlogBundle_blog_add' in app.request.attributes.get('_route') %}
+    <form action="{{ path('BloggerBlogBundle_blog_add') }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_widget(form) }}
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+{% endif %}

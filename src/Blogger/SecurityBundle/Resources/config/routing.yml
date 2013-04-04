@@ -1,0 +1,12 @@
+# src/Blogger/SecurityBundle/Resources/config/routing.yml
+BloggerSecurityBundle_user_register:
+    pattern:  /register
+    defaults: { _controller: BloggerSecurityBundle:User:register }
+    requirements:
+        _method: GET|POST
+        
+BloggerSecurityBundle_user_edit:
+    pattern:  /edit
+    defaults: { _controller: BloggerSecurityBundle:User:edit }
+    requirements:
+        _method: GET|POST

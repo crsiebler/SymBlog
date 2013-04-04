@@ -1,0 +1,22 @@
+# app/config/routing.yml
+
+BloggerBlogBundle:
+    resource: "@BloggerBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+BloggerSecurityBundle:  
+    resource: "@BloggerSecurityBundle/Resources/config/routing.yml"
+    prefix:   /admin
+    
+login:
+    pattern:  /login
+    defaults: { _controller: BloggerSecurityBundle:Security:login }
+login_check:
+    pattern:  /login_check
+logout:
+    pattern:  /logout
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal

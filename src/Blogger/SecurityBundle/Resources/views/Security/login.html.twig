@@ -1,0 +1,22 @@
+{# src/Blogger/SecurityBundle/Resources/views/Security/login.html.twig #}
+{% extends 'BloggerSecurityBundle::layout.html.twig' %}
+
+{% block body %}
+    <header>
+        <h1>Login</h1>
+    </header>
+
+    {% if error %}
+        <div class="blogger-notice">{{ error.message }}</div>
+    {% endif %}
+
+    <form action="{{ path('login_check') }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" /><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password" /><br>
+        
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}

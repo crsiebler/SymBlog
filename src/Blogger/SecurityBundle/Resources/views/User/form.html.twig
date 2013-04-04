@@ -1,0 +1,17 @@
+{# src/Blogger/SecurityBundle/Resources/views/User/form.html.twig #}
+
+{% if 'BloggerSecurityBundle_user_register' in app.request.attributes.get('_route') %}
+    <form action="{{ path('BloggerSecurityBundle_user_register') }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_widget(form) }}
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+{% elseif 'BloggerSecurityBundle_user_edit' in app.request.attributes.get('_route') %}
+    <form action="{{ path('BloggerSecurityBundle_user_edit') }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_widget(form) }}
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+{% endif %}

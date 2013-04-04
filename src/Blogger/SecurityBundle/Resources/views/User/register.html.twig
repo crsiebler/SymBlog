@@ -1,0 +1,16 @@
+{# src/Blogger/SecurityBundle/Resources/views/User/register.html.twig #}
+{% extends 'BloggerSecurityBundle::layout.html.twig' %}
+
+{% block body %}
+    <header>
+        <h1>Register a new user</h1>
+    </header>
+
+    {% if app.session.hasFlash('blogger-notice') %}
+        <div class="blogger-notice">
+            {{ app.session.flash('blogger-notice') }}
+        </div>
+    {% endif %}
+    
+    {% include 'BloggerSecurityBundle:User:form.html.twig' with { 'form': form } %}
+{% endblock %}

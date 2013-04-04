@@ -1,0 +1,54 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+
+{% block body %}
+
+    {% if 'BloggerBlogBundle_admin' not in app.request.attributes.get('_route') %}
+        {% for blog in blogs %}
+            <article class ="blog">
+                <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
+                <header>
+                    <h2><a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id }) }}">{{ blog.title }}</a></h2>
+                </header>
+
+                <img src="{{ asset(['images/', blog.image]|join) }}" alt="{{ blog.title }} image not found" class="large"/>
+                <div class="snippet">
+                    <p>{{ blog.blog(500) }}</p>
+                    <p class="continue"><a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id }) }}">Continue reading...</a></p>
+                </div>
+
+                <footer class="meta">
+                    <p>Comments: <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id }) }}#comments">{{ blog.comments|length }}</a></p>
+                    <p>Posted by <span class="highlight">{{ blog.author }}</span> at {{ blog.created|date('h:iA') }}</p>
+                    <p>Tags: <span class="highlight">{{ blog.tags }}</span></p>
+                </footer>
+            </article>
+        {% else %}
+            <p>There are no blog entries for symblog</p>
+        {% endfor %}
+    {% endif %}
+
+    {% if 'BloggerBlogBundle_admin' in app.request.attributes.get('_route') %}
+        <header>
+            <h1>Edit Posts</h1>
+        </header>
+            
+        {% if app.session.hasFlash('blogger-notice') %}
+            <div class="blogger-notice">
+                {{ app.session.flash('blogger-notice') }}
+            </div>
+        {% endif %}            
+            
+        {% for blog in blogs %}
+            <article class="admin">
+                <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
+                <header>
+                    <h2><a href="{{ path('BloggerBlogBundle_blog_update', { 'id': blog.id } ) }}">{{ blog.title }}</a></h2>
+                </header>
+            </article>
+        {% else %}
+        <p>There are no blog entries for symblog</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

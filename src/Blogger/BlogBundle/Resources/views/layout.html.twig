@@ -1,0 +1,21 @@
+{# src/Blogger/BloggerBundle/Resources/views/layout.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@BloggerBlogBundle/Resources/public/css/*'
+        output='css/blogger.css'
+        filter='?yui_css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block sidebar %}
+    {% if 'BloggerBlogBundle_admin' in app.request.attributes.get('_route') or 'BloggerBlogBundle_blog_update' in app.request.attributes.get('_route') %}
+        {% render "BloggerBlogBundle:Admin:sidebar" %}
+    {% else %}
+        {% render "BloggerBlogBundle:Page:sidebar" %}
+    {% endif %}   
+{% endblock %}

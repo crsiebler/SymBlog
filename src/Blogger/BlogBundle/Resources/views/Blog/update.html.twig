@@ -1,0 +1,25 @@
+{# src/Blogger/BlogBundle/Resources/views/Blog/update.html.twig #}
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Edit the "{{ blog.title }}" Post</h1>
+    </header>
+
+    {% if app.session.hasFlash('blogger-notice') %}
+        <div class="blogger-notice">
+            {{ app.session.flash('blogger-notice') }}
+        </div>
+    {% endif %}
+
+    {% include 'BloggerBlogBundle:Blog:form.html.twig' with { 'form': form } %}
+    
+    <section class="comments" id="comments">
+        <section class="previous-comments">
+            <h3>Remove Comments</h3>
+            {% include 'BloggerBlogBundle:Comment:index.html.twig' with { 'comments': comments } %}
+        </section>
+    </section>
+{% endblock %}
